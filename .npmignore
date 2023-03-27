@@ -1,0 +1,4 @@
+proxyport-*.tgz
+src
+.git
+.npmignore

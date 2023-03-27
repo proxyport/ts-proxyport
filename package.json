@@ -1,0 +1,23 @@
+{
+  "name": "@proxyport/proxyport",
+  "version": "1.0.2",
+  "description": "proxyport Node.js package provides interfaces to the Proxy Port API",
+  "keywords": ["http", "https", "request", "client", "proxy"],
+  "tags": ["http", "https", "request", "client", "proxy"],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Proxy Port <proxyportcom@gmail.com> (https://proxy-port.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/proxyport/ts-proxyport.git"
+  },
+  "bugs": {
+    "url": "https://github.com/proxyport/ts-proxyport/issues"
+  },
+  "homepage": "https://proxy-port.com/en/scraping-proxy/sdk/ts-proxyport",
+  "devDependencies": {
+    "@types/node": "^18.15.7",
+    "typescript": "^5.0.2"
+  }
+}
