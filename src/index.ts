@@ -9,25 +9,24 @@ export class ProxyPort {
         host: 'api.proxy-port.com',
         path: '/scraping-proxy',
         headers: {
-            'X-API-KEY': ''
+            'X-API-KEY': '',
+            'User-Agent': 'ts-proxyport/1.1.1'
         },
     };
 
     constructor(apiKey: string) {
-        this.options.headers = {"X-API-KEY": apiKey};
+        this.options.headers["X-API-KEY"] = apiKey;
     }
 
     public async getProxy(): Promise<string> {
-        let proxy = this.newProxies.pop();
+        let proxy = this.newProxies.shift();
         if (!proxy) {
             await this.fetchProxies();
-            proxy = this.newProxies.pop();
+            proxy = this.newProxies.shift();
         }
         if (!proxy) {
             let knownList = Array.from(this.knownProxies.keys());
             proxy = knownList[Math.floor(Math.random() * knownList.length)];
-        } else {
-            this.knownProxies.set(proxy, true);
         }
         return proxy || "";
     }
@@ -37,12 +36,14 @@ export class ProxyPort {
         if (this.lastApiCall && (Number(now) - Number(this.lastApiCall) < 30000)) return;
         try {
             let body = await this.fetch();
+            let newProxies: Array<string> = [];
             JSON.parse(body).data.forEach((proxy: string) => {
-                if (!this.knownProxies.get(proxy)) {
-                    this.newProxies.push(proxy);
-                    this.knownProxies.set(proxy, true);
+                if (!this.knownProxies.get(proxy) || this.newProxies.includes(proxy)) {
+                    newProxies.push(proxy);
                 }
+                this.knownProxies.set(proxy, true);
             });
+            this.newProxies = newProxies;
         } catch (e) {
             console.log('Error on JSON.parse(this.fetch())', e);
         }

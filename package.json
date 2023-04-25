@@ -1,6 +1,6 @@
 {
   "name": "@proxyport/proxyport",
-  "version": "1.0.2",
+  "version": "1.1.1",
   "description": "proxyport Node.js package provides interfaces to the Proxy Port API",
   "keywords": ["http", "https", "request", "client", "proxy"],
   "tags": ["http", "https", "request", "client", "proxy"],
